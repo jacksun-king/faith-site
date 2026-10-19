@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>恩典之路 · 基督信仰分享站</title>
+<meta name="description" content="基督信仰个人分享站：每日经文、灵修默想、诗歌推荐与祷告角落。">
+<style>
+  :root{
+    --navy:#1c2e4a; --navy-deep:#142238; --gold:#c9a227; --gold-soft:#e6cf8a;
+    --bg:#faf9f5; --card:#ffffff; --ink:#2b2b2b; --ink-soft:#6b6b6b;
+    --radius:16px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:"PingFang SC","Microsoft YaHei","Segoe UI",serif;background:var(--bg);color:var(--ink);line-height:1.8}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+  a{color:var(--navy);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  header{position:sticky;top:0;z-index:10;background:rgba(250,249,245,.93);backdrop-filter:blur(8px);border-bottom:1px solid #e8e4d8}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+  .logo{font-weight:800;font-size:1.2rem;color:var(--navy);display:flex;align-items:center;gap:10px}
+  .logo .cross{width:20px;height:20px;position:relative;display:inline-block}
+  .logo .cross::before{content:"";position:absolute;left:8px;top:0;width:4px;height:20px;background:var(--gold);border-radius:2px}
+  .logo .cross::after{content:"";position:absolute;left:2px;top:6px;width:16px;height:4px;background:var(--gold);border-radius:2px}
+  nav ul{display:flex;gap:20px;list-style:none}
+  nav ul a{color:var(--ink-soft);font-size:.93rem}
+  nav ul a:hover{color:var(--navy)}
+
+  /* Hero */
+  .hero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-deep) 100%);color:#f2efe6;text-align:center;padding:88px 24px 72px;position:relative;overflow:hidden}
+  .hero::after{content:"✝";position:absolute;right:-40px;bottom:-70px;font-size:320px;color:rgba(201,162,39,.07);line-height:1}
+  .hero .eyebrow{letter-spacing:.5em;font-size:.8rem;color:var(--gold-soft);margin-bottom:18px}
+  .hero h1{font-size:clamp(1.9rem,5vw,3rem);font-weight:800;letter-spacing:.06em}
+  .hero blockquote{max-width:640px;margin:26px auto 6px;font-size:1.12rem;color:#d8d2c0;font-style:italic}
+  .hero cite{display:block;margin-top:10px;color:var(--gold-soft);font-style:normal;font-size:.95rem}
+  .divider{width:56px;height:3px;background:var(--gold);border:none;margin:34px auto;border-radius:2px}
+
+  section{padding:68px 0}
+  .sec-head{text-align:center;margin-bottom:40px}
+  .sec-head .tag{display:inline-block;background:rgba(201,162,39,.14);color:#8a6d12;padding:4px 16px;border-radius:999px;font-size:.85rem;font-weight:600;margin-bottom:10px}
+  .sec-head h2{font-size:clamp(1.4rem,3.5vw,2rem);font-weight:800;color:var(--navy)}
+
+  /* 每日经文 */
+  .verse-card{background:var(--card);border:1px solid #ece7da;border-radius:var(--radius);padding:44px 32px;text-align:center;box-shadow:0 8px 28px rgba(28,46,74,.08);max-width:720px;margin:0 auto;position:relative}
+  .verse-card::before{content:"❝";position:absolute;top:18px;left:26px;font-size:2.6rem;color:rgba(201,162,39,.35);line-height:1}
+  .verse-card .vtext{font-size:1.28rem;color:var(--navy);font-weight:600}
+  .verse-card .vref{margin-top:14px;color:var(--ink-soft)}
+  .verse-card .btn{margin-top:26px}
+  .btn{display:inline-block;background:var(--gold);color:#fff;padding:10px 26px;border-radius:999px;font-weight:600;border:none;cursor:pointer;font-size:.95rem;transition:.2s;font-family:inherit}
+  .btn:hover{background:#a8871f}
+
+  /* 灵修 */
+  .grid{display:grid;gap:20px}
+  .g3{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+  .card{background:var(--card);border:1px solid #ece7da;border-radius:var(--radius);padding:28px;transition:.25s}
+  .card:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(28,46,74,.10)}
+  .card .icon{font-size:1.9rem;display:block;margin-bottom:10px}
+  .card h3{color:var(--navy);font-size:1.1rem;margin-bottom:8px}
+  .card p{color:var(--ink-soft);font-size:.93rem}
+
+  /* 诗歌 */
+  .hymns{background:var(--card);border:1px solid #ece7da;border-radius:var(--radius);overflow:hidden}
+  .hymns .row{display:flex;align-items:center;gap:18px;padding:20px 28px;border-bottom:1px solid #f0ece1}
+  .hymns .row:last-child{border-bottom:none}
+  .hymns .num{width:40px;height:40px;border-radius:50%;background:rgba(28,46,74,.07);color:var(--navy);font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .hymns .t{font-weight:700;color:var(--navy)}
+  .hymns .d{color:var(--ink-soft);font-size:.9rem}
+
+  /* 祷告 */
+  .pray{background:linear-gradient(160deg,var(--navy),var(--navy-deep));color:#ece8db;border-radius:var(--radius);padding:44px 36px;text-align:center}
+  .pray h3{font-size:1.3rem;margin-bottom:16px;color:#fff}
+  .pray p{max-width:640px;margin:0 auto 6px;color:#cfc9b8}
+  .pray .note{font-size:.85rem;color:#9a9483;margin-top:22px}
+
+  /* 聚会信息 */
+  .info-table{width:100%;border-collapse:collapse;background:var(--card);border-radius:var(--radius);overflow:hidden;border:1px solid #ece7da}
+  .info-table th{background:rgba(28,46,74,.06);color:var(--navy);text-align:left;padding:14px 22px;font-size:.95rem}
+  .info-table td{padding:14px 22px;border-top:1px solid #f0ece1;font-size:.93rem;color:var(--ink-soft)}
+
+  footer{background:var(--navy-deep);color:#b8b2a2;padding:40px 0 26px;margin-top:48px;text-align:center}
+  footer .flogo{color:#f2efe6;font-weight:700;margin-bottom:10px}
+  footer p{font-size:.85rem;margin:4px 0}
+  footer .disclaim{margin-top:14px;font-size:.78rem;color:#8a8574;max-width:640px;margin-left:auto;margin-right:auto}
+
+  @media(max-width:640px){
+    nav ul{display:none}
+    .hero{padding:64px 20px 52px}
+    section{padding:48px 0}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="logo"><span class="cross"></span>恩典之路</div>
+      <ul>
+        <li><a href="#verse">每日经文</a></li>
+        <li><a href="#devotion">灵修默想</a></li>
+        <li><a href="#hymn">诗歌</a></li>
+        <li><a href="#pray">祷告角落</a></li>
+        <li><a href="#gather">聚会信息</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="eyebrow">GRACE AND TRUTH</div>
+  <h1>恩典之路 · 与你同行</h1>
+  <blockquote>"你们祈求，就给你们；寻找，就寻见；叩门，就给你们开门。"</blockquote>
+  <cite>—— 马太福音 7:7</cite>
+</div>
+
+<section id="verse">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">每日经文</span>
+      <h2>今天，祂对你说</h2>
+    </div>
+    <div class="verse-card">
+      <div class="vtext" id="vtext">……</div>
+      <div class="vref" id="vref"></div>
+      <button class="btn" onclick="nextVerse()">换一句 🙏</button>
+    </div>
+  </div>
+</section>
+
+<section id="devotion" style="background:#fff">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">灵修默想</span>
+      <h2>在忙碌的世界里，留一个安静的位置</h2>
+    </div>
+    <div class="grid g3">
+      <div class="card"><span class="icon">📖</span><h3>读经不贪多</h3><p>每天一小段，反复咀嚼胜过囫囵吞枣。读完问自己三个问题：说了什么？对我意味着什么？今天能行出什么？</p></div>
+      <div class="card"><span class="icon">🙏</span><h3>祷告不贪长</h3><p>祷告是与父亲说话，不必堆砌华丽的辞藻。诚实、简短、持续的祷告，胜过长而空洞的重复。</p></div>
+      <div class="card"><span class="icon">🤲</span><h3>安息不是偷懒</h3><p>留白的时间不是浪费。真正的安息，是把"我能控制一切"的幻觉放下，承认祂掌权。</p></div>
+      <div class="card"><span class="icon">🕯️</span><h3>在低谷中仰望</h3><p>诗篇里满是眼泪与质问，神不介意我们的诚实。低谷中最好的祷告，有时只是一句："我信，但我信不足，求主帮助。"</p></div>
+      <div class="card"><span class="icon">🫂</span><h3>恩典先于行为</h3><p>不是做好了才被爱，而是先被爱了才有力量做好。让这个顺序住进心里，焦虑就少了一半。</p></div>
+      <div class="card"><span class="icon">🌿</span><h3>小事上的忠心</h3><p>信仰不在远方的高峰，而在今天的一次忍耐、一句诚实话、一个小小的善意里。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="hymn">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">诗歌</span>
+      <h2>让旋律带你进入安静</h2>
+    </div>
+    <div class="hymns">
+      <div class="row"><div class="num">1</div><div><div class="t">《Amazing Grace 奇异恩典》</div><div class="d">经典中的经典。写下它的人曾是奴隶贩子，被恩典翻转。"前我失丧，今被寻回。"</div></div></div>
+      <div class="row"><div class="num">2</div><div><div class="t">《你坐着为王》</div><div class="d">不安定年代的定心之歌——环境会变，宝座不变。</div></div></div>
+      <div class="row"><div class="num">3</div><div><div class="t">《恩典的记号》</div><div class="d">回头看，一路的弯路都有恩典的记号。</div></div></div>
+      <div class="row"><div class="num">4</div><div><div class="t">《It Is Well 与我同在》</div><div class="d">作者在丧亲之痛中写下"我心灵得安宁"。适合低谷时单曲循环。</div></div></div>
+      <div class="row"><div class="num">5</div><div><div class="t">《野地的花》</div><div class="d">轻快温柔的提醒：飞鸟不种不收，天父尚且养活它。</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="pray" style="background:#fff">
+  <div class="wrap">
+    <div class="pray">
+      <h3>🕯️ 祷告角落</h3>
+      <p>"神啊，求你按你的慈爱怜恤我，按你丰盛的慈悲涂抹我的过犯。"</p>
+      <p>无论你今天带着什么来到这里——喜乐、疲惫、疑问或眼泪——都可以留在这里。</p>
+      <p class="note">这是一个安静的自处空间。如果你正经历艰难，也请考虑告诉身边可信任的人——信仰从来不是孤身一人的旅程。</p>
+    </div>
+  </div>
+</section>
+
+<section id="gather">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">聚会信息</span>
+      <h2>团契生活</h2>
+    </div>
+    <table class="info-table">
+      <tr><th>时间</th><th>内容</th><th>形式</th></tr>
+      <tr><td>每日清晨</td><td>个人灵修：一章经文 + 短祷</td><td>自行安排</td></tr>
+      <tr><td>每周日上午</td><td>主日聚会（示例，具体请咨询所在地教会）</td><td>线下 / 线上</td></tr>
+      <tr><td>每周三晚</td><td>小组查经分享</td><td>小组</td></tr>
+      <tr><td>每月一次</td><td>诗歌之夜 / 爱宴</td><td>团契活动</td></tr>
+    </table>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo">✝ 恩典之路</div>
+  <p>个人信仰分享站 · 信仰日记 · 经文与诗歌收藏</p>
+  <p>© 2026 恩典之路 · Grace and Truth</p>
+  <p class="disclaim">本站为个人灵修与分享用途。请遵守所在地的法律法规；如需参加教会聚会，建议前往当地依法登记的宗教活动场所。</p>
+</footer>
+
+<script>
+const verses = [
+  ["我们晓得万事都互相效力，叫爱神的人得益处。","罗马书 8:28"],
+  ["你的话是我脚前的灯，是我路上的光。","诗篇 119:105"],
+  ["应当一无挂虑，只要凡事借着祷告、祈求和感谢，将你们所要的告诉神。","腓立比书 4:6"],
+  ["耶和华是我的牧者，我必不至缺乏。","诗篇 23:1"],
+  ["凡劳苦担重担的人，可以到我这里来，我就使你们得安息。","马太福音 11:28"],
+  ["爱是恒久忍耐，又有恩慈。","哥林多前书 13:4"],
+  ["我的心哪，你当默然倚靠耶和华，耐性等候他。","诗篇 37:7"],
+  ["神是我们的避难所，是我们的力量，是我们在患难中随时的帮助。","诗篇 46:1"],
+];
+let i = Math.floor(Math.random()*verses.length);
+function render(){
+  document.getElementById('vtext').textContent = "「" + verses[i][0] + "」";
+  document.getElementById('vref').textContent = "—— " + verses[i][1];
+}
+function nextVerse(){ i = (i+1) % verses.length; render(); }
+render();
+</script>
+
+</body>
+</html>
